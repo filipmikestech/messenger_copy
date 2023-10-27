@@ -31,3 +31,11 @@ I am making commits based on each video. So you can download each corresponding 
 - Creating Prisma DB Models
 - Creating Conversation Repository
 - Installing Express
+
+## 4. Video:
+
+- Fixing Not Running Express
+- Analyzing Routing Best Practices
+- Setting Up Routing
+- Getting Actual Data from the Database
+- Conclusion
