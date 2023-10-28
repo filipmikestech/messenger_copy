@@ -15,5 +15,5 @@ export default function defineConversationsRoutes(expressApp: express.Applicatio
     }
   });
 
-  expressApp.use("/conversation", router);
+  expressApp.use("/api/conversation", router);
 }
