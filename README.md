@@ -50,3 +50,8 @@ I am making commits based on each video. So you can download each corresponding 
 - Prisma Studio
 - Prisma Lazy Loading
 - Displaying Data
+
+## 6. [Video](https://youtu.be/E92ePEE8b54?si=A8Dgmo1uvJ1ZyCRQ):
+
+- Improving Design Of Conversation Selector
+- Improving Design Of Conversation List Header
