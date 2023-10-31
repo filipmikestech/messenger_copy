@@ -17,7 +17,7 @@ export const ConversationList = () => {
   }, []);
 
   return (
-    <div className=" h-full w-[400px] bg-[#ececec]">
+    <div className=" h-full w-[400px] bg-sideBgColor">
       <ConversationHeader />
       {conversationList.map((conversation) => {
         return <ConversationSelector name={conversation.owner.name} />;
