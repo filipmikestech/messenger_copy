@@ -55,3 +55,11 @@ I am making commits based on each video. So you can download each corresponding 
 
 - Improving Design Of Conversation Selector
 - Improving Design Of Conversation List Header
+
+## 7. [Video](https://youtu.be/CXf1sMjU_mo?si=tfv0XMbVe9Eo8e_j):
+
+- Adding Text Input
+- Adding Emoji Picker
+- Improving Text Input Design
+- Setting up the Emoji Picker
+- Adding Colors To Tailwind Theme
