@@ -63,3 +63,9 @@ I am making commits based on each video. So you can download each corresponding 
 - Improving Text Input Design
 - Setting up the Emoji Picker
 - Adding Colors To Tailwind Theme
+
+## 8. [Video](https://youtu.be/yG9q3A6b39g?si=Ns6rH1vhFbbh4mYx):
+
+- Improving Conversation Design
+- Adding Group Messages Logic
+- Adding User Image
