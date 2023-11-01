@@ -20,7 +20,7 @@ export const ConversationList = () => {
     <div className=" h-full w-[400px] bg-sideBgColor">
       <ConversationHeader />
       {conversationList.map((conversation) => {
-        return <ConversationSelector name={conversation.owner.name} />;
+        return <ConversationSelector key={conversation.id} name={conversation.owner.name} />;
       })}
     </div>
   );

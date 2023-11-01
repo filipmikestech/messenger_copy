@@ -1,4 +1,4 @@
-import { Conversation } from "./compoments/Conversation";
+import { Conversation } from "./compoments/conversation/Conversation";
 import { ConversationList } from "./compoments/conversationList/ConversationList";
 import { MessageTextInput } from "./compoments/MessageTextInput";
 
