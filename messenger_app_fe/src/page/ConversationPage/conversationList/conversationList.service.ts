@@ -1,4 +1,4 @@
-import { api } from "../../utils/axiosIntance";
+import { api } from "../../../utils/axiosIntance";
 
 export const ConversationListService = {
   async getConversationList() {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Conversation } from "../../schema";
-import { ConversationHeader } from "./components/ConversationHeader";
+import { Conversation } from "../../../schema";
 import { ConversationSelector } from "./components/ConversationSelector";
+import { ConversationHeader } from "./components/conversationHeader/ConversationHeader";
 import { ConversationListService } from "./conversationList.service";
 
 export const ConversationList = () => {

@@ -1,3 +1,4 @@
+import { ProfileImage } from "../../../compoments/ProfileImage";
 import { ConversationHeader } from "./components/ConversationHeader";
 
 const MESSAGES = [
@@ -33,25 +34,24 @@ export const Conversation = () => {
     <div className="w-full h-full p-3 bg-mainBgColor flex flex-col">
       <ConversationHeader />
       <div className=" h-full flex flex-col-reverse gap-2">
-        {MESSAGES.map((obj, index) => (
-          <div
-            className={` flex ${obj.user === LOGGED_IN_USER ? "justify-end" : "justify-start"} ${index > 0 && MESSAGES[index - 1].user !== obj.user && "mb-4"}`}
-          >
-            {index > 0 && MESSAGES[index - 1].user !== obj.user && (
-              <div className="w-[40px] h-[40px] rounded-full border-[1px] border-solid border-darkTextColor p-2">
-                <img src="/images/no-profile-img.png" />
+        {MESSAGES.map((obj, index) => {
+          const isNewUser = index > 0 && MESSAGES[index - 1].user !== obj.user;
+          const isLoggedInUser = obj.user === LOGGED_IN_USER;
+
+          return (
+            <div className={` flex ${isLoggedInUser ? "justify-end" : "justify-start"} ${isNewUser && "mb-4"}`}>
+              {isNewUser && <ProfileImage />}
+              <div
+                className={` ${isLoggedInUser ? "bg-messengerColor" : " bg-inputLightBgColor"} ${
+                  isNewUser ? "ml-2" : "ml-[48px]"
+                } rounded-[25px] py-2 px-4 max-w-[55%] `}
+                key={obj.created + obj.message}
+              >
+                {obj.message}
               </div>
-            )}
-            <div
-              className={` ${obj.user === LOGGED_IN_USER ? "bg-messengerColor" : " bg-inputLightBgColor"} ${
-                index > 0 && MESSAGES[index - 1].user !== obj.user ? "ml-2" : "ml-[48px]"
-              } rounded-[25px] py-2 px-4 max-w-[55%] `}
-              key={obj.created + obj.message}
-            >
-              {obj.message}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

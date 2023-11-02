@@ -1,15 +1,9 @@
-import { Conversation } from "./compoments/conversation/Conversation";
-import { ConversationList } from "./compoments/conversationList/ConversationList";
-import { MessageTextInput } from "./compoments/MessageTextInput";
+import { ConversationPage } from "./page/ConversationPage/ConversationPage";
 
 function App() {
   return (
-    <div className=" w-screen h-screen flex">
-      <ConversationList />
-      <div className=" flex flex-col w-full h-full">
-        <Conversation />
-        <MessageTextInput />
-      </div>
+    <div>
+      <ConversationPage />
     </div>
   );
 }
