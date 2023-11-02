@@ -69,3 +69,13 @@ I am making commits based on each video. So you can download each corresponding 
 - Improving Conversation Design
 - Adding Group Messages Logic
 - Adding User Image
+
+## 9. [Video](https://youtu.be/JNqy8JX6NeE?si=dHsLK4gfoU9CQyOJ):
+
+- Creating Backlog
+- Adding Conversation Header
+- Creating Conversation Actions
+- Improving Conversation Header
+- Refactor
+- Export Profile Image To Component
+- Changing File Structure
