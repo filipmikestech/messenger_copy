@@ -79,3 +79,10 @@ I am making commits based on each video. So you can download each corresponding 
 - Refactor
 - Export Profile Image To Component
 - Changing File Structure
+
+## 10. [Video](https://youtu.be/hPcnMZGTwUY?si=ITikBfDEyuQ3RD2F):
+
+- Fixing Size Issues
+- Adding routing
+- Creating a Login Page
+- Adding Backend Part
