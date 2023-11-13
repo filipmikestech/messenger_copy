@@ -1,7 +1,7 @@
 import { IoCreateOutline } from "react-icons/io5";
 import { ProfileImage } from "../../../../../compoments/ProfileImage";
 import { Search } from "./components/Search";
-export const ConversationHeader = () => {
+export const ConversationListHeader = () => {
   return (
     <div className="h-[150px] flex flex-col justify-end p-3">
       <div className="flex h-full items-center">
