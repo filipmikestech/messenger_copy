@@ -86,3 +86,12 @@ I am making commits based on each video. So you can download each corresponding 
 - Adding routing
 - Creating a Login Page
 - Adding Backend Part
+
+## 11. [Video](https://youtu.be/SfIje10SgxQ?si=ZAiM6390xnhBzvih):
+
+- Login Backend Part
+- Login Frontend Part
+- Fixing Integration Issues
+- Saving User To LocalStorage
+- Added Types To Requests
+- Added Types To useLocalStorage Hook
