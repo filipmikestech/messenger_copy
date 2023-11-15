@@ -1,11 +1,23 @@
 import { Button, TextField } from "@mui/material";
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useLocalStorage from "../../hooks/useLocalstorage";
+import { User } from "../../schema";
+import { loginService } from "./loginPage.service";
 
 export const LoginPage = () => {
   const [nameForm, setNameForm] = useState("");
+  const [_, setUser] = useLocalStorage<User | null>("loginUser", null);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const user = await loginService.login(nameForm);
+    if (user) {
+      setUser(user);
+      navigate("/");
+    }
+    console.log(user);
   };
   return (
     <div className="w-screen h-screen flex flex-col gap-8 justify-center items-center">
