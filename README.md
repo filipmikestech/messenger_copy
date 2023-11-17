@@ -95,3 +95,12 @@ I am making commits based on each video. So you can download each corresponding 
 - Saving User To LocalStorage
 - Added Types To Requests
 - Added Types To useLocalStorage Hook
+
+## 12. [Video](https://youtu.be/Rmy7b83ETEw?si=sVqKN2M2pLcc8x3n):
+
+- Why WebSockets
+- Adding Socket.io to Backend
+- Adding Socket.io to Frontend
+- Sharing Socket.io Instance in Frontend
+- Sharing Socket.io Instance in Backend
+- Studying Socket.io Private Rooms
