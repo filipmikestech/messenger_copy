@@ -4,7 +4,7 @@ import { socket } from "../../../../../utils/socketIntance";
 import { Search } from "./components/Search";
 export const ConversationListHeader = () => {
   const onClick = () => {
-    socket.emit("openConversation", { with: "Petr" });
+    socket.emit("openConversation", "Petr");
   };
   return (
     <div className="h-[150px] flex flex-col justify-end p-3">

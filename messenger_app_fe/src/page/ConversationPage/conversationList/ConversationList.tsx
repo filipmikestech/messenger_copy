@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Conversation } from "../../../schema";
+import { socket } from "../../../utils/socketIntance";
 import { ConversationSelector } from "./components/ConversationSelector";
 import { ConversationListHeader } from "./components/conversationListHeader/ConversationListHeader";
 import { ConversationListService } from "./conversationList.service";
@@ -14,6 +15,18 @@ export const ConversationList = () => {
   };
   useEffect(() => {
     getData();
+
+    socket.on("openConversation", (conversation) => {
+      console.log(conversation);
+      if (conversation) {
+        setConversationList((conversationList) => [...conversationList, conversation]);
+      }
+      console.log(socket.id);
+    });
+
+    return () => {
+      socket.off("openConversation");
+    };
   }, []);
 
   return (
