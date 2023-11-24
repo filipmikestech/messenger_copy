@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { IoCreateOutline } from "react-icons/io5";
 import { ProfileImage } from "../../../../../compoments/ProfileImage";
-import { socket } from "../../../../../utils/socketIntance";
+import { CreateNewConversationModal } from "./components/CreateNewConversationModal";
 import { Search } from "./components/Search";
 export const ConversationListHeader = () => {
+  const [openCreateNewConversationModal, setOpenCreateNewConversationModal] = useState(false);
   const onClick = () => {
-    socket.emit("openConversation", "Petr");
+    setOpenCreateNewConversationModal(true);
   };
+
   return (
     <div className="h-[150px] flex flex-col justify-end p-3">
       <div className="flex h-full items-center">
@@ -20,6 +23,7 @@ export const ConversationListHeader = () => {
         </div>
       </div>
       <Search />
+      <CreateNewConversationModal open={openCreateNewConversationModal} handleClose={() => setOpenCreateNewConversationModal(false)} />
     </div>
   );
 };
