@@ -104,3 +104,16 @@ I am making commits based on each video. So you can download each corresponding 
 - Sharing Socket.io Instance in Frontend
 - Sharing Socket.io Instance in Backend
 - Studying Socket.io Private Rooms
+
+## 13. [Video](https://youtu.be/Ws7Z4N2uAKg?si=IDwha4KI1YH-bgOY):
+
+- Studying Socket.io Rooms
+- Struggling With Private Rooms Implementation
+- Implementing Conversation Creation
+- Adding Frontend Support
+
+## 14. [Video](https://youtu.be/dW9XFv9x3h0?si=SRxdFm0OYgA8_LOR):
+
+- Creating Conversation Modal
+- Adding Socket.io response (acknowledgement)
+- Conversation Schema Investigation
