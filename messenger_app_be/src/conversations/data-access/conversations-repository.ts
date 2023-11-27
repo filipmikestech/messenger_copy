@@ -2,22 +2,33 @@ import { Conversation } from "@prisma/client";
 import { prisma } from "../../../prisma/prismaInstance.js";
 
 export const getAllConversations = async (): Promise<Conversation[]> => {
-  return await prisma.conversation.findMany({ include: { owner: true, joiner: true } });
+  return await prisma.conversation.findMany({ include: { Users: true } });
 };
 
-export const getConversationByOwnerAndJoiner = async (userIdOwner: string, userIdJoiner: string) => {
+export const getConversationByUsers = async (user1Id: string, user2Id: string) => {
   return await prisma.conversation.findFirst({
-    where: { userIdOwner: userIdOwner || userIdJoiner, userIdJoiner: userIdJoiner || userIdOwner },
-    include: { owner: true, joiner: true },
+    where: {
+      OR: [
+        {
+          Users: {
+            some: { id: user1Id },
+          },
+        },
+        {
+          Users: {
+            some: { id: user2Id },
+          },
+        },
+      ],
+    },
   });
 };
 
-export const createConversation = async (userIdJoiner: string, userIdOwner: string) => {
+export const createConversation = async (user1Id: string, user2Id: string) => {
   return await prisma.conversation.create({
     data: {
-      userIdJoiner: userIdJoiner,
-      userIdOwner: userIdOwner,
+      Users: { connect: [{ id: user1Id }, { id: user2Id }] },
     },
-    include: { owner: true, joiner: true },
+    include: { Users: true },
   });
 };

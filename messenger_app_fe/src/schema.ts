@@ -1,25 +1,21 @@
 export interface User {
   id: string;
   name: string;
-  ConversationOwner: Conversation[] | null;
-  ConversationJoiner: Conversation[] | null;
-  Messages: Messages[] | null;
+  Messages: Message[] | null;
+  Conversations: Conversation[] | null;
 }
 
 export interface Conversation {
   id: string;
-  owner: User;
-  joiner: User;
-  userIdOwner: string;
-  userIdJoiner: string;
-  Messages: Messages[] | null;
+  Users: User[] | null;
+  Messages: Message[] | null;
 }
 
-export interface Messages {
+export interface Message {
   id: string;
   user: User;
   userId: string;
   conversation: Conversation;
-  message: string;
+  text: string;
   conversationId: string;
 }
