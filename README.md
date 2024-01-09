@@ -117,3 +117,22 @@ I am making commits based on each video. So you can download each corresponding 
 - Creating Conversation Modal
 - Adding Socket.io response (acknowledgement)
 - Conversation Schema Investigation
+
+## 15. [Video](https://youtu.be/6IboOLJg0uU?si=1eU5-U74ZolL_eBq):
+
+- Explaining Issue With Current Schema
+- Adding Many To Many Relation With Prisma
+- Pushing New Schema To Database
+- Adding Prisma Filtering To Get Conversation
+- Adding Prisma Connect To Create Conversation
+- Fixing Frontend issues
+
+## 16. [Video](https://youtu.be/2Ael2PfJEy0?si=k3bmAlgT2Yd2gsn7):
+
+- Explaining Auth
+- Research
+- Implementing Interceptor
+- Adding Middleware
+- Custom Request Type
+- Changing backend
+- Fixing issues
