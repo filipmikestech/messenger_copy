@@ -6,6 +6,14 @@ import defineConversationsRoutes from "./conversations/entry-points/api/routes.j
 import defineConversationsWebsockets from "./conversations/entry-points/api/websockets.js";
 import defineLoginRoutes from "./login/entry-points/api/login-routes.js";
 
+declare global {
+  namespace Express {
+    interface Request {
+      userId?: string;
+    }
+  }
+}
+
 dotenv.config();
 
 const expressApp: Express = express();
@@ -13,6 +21,11 @@ expressApp.use(cors());
 const port = process.env.PORT;
 
 expressApp.use(express.json());
+
+expressApp.use((req, res, next) => {
+  req.userId = req.headers.authorization;
+  return next();
+});
 
 defineConversationsRoutes(expressApp);
 defineLoginRoutes(expressApp);

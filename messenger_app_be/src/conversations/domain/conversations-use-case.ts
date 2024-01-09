@@ -2,8 +2,8 @@ import { User } from "@prisma/client";
 import * as loginRepository from "../../login/data-access/login-repository.js";
 import * as conversationsRepository from "../data-access/conversations-repository.js";
 
-export const getAllConversations = async () => {
-  return await conversationsRepository.getAllConversations();
+export const getAllConversations = async (userId: string) => {
+  return await conversationsRepository.getAllConversations(userId);
 };
 
 export const createConversation = async (userNameJoiner: string, owner: User) => {

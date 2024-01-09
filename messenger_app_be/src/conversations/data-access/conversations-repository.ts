@@ -1,14 +1,21 @@
 import { Conversation } from "@prisma/client";
 import { prisma } from "../../../prisma/prismaInstance.js";
 
-export const getAllConversations = async (): Promise<Conversation[]> => {
-  return await prisma.conversation.findMany({ include: { Users: true } });
+export const getAllConversations = async (userId: string): Promise<Conversation[]> => {
+  return await prisma.conversation.findMany({
+    where: {
+      Users: {
+        some: { id: userId },
+      },
+    },
+    include: { Users: true },
+  });
 };
 
 export const getConversationByUsers = async (user1Id: string, user2Id: string) => {
   return await prisma.conversation.findFirst({
     where: {
-      OR: [
+      AND: [
         {
           Users: {
             some: { id: user1Id },
