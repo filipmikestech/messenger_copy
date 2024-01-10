@@ -11,17 +11,21 @@ export default function defineConversationsWebsockets(io: Server, socket: Socket
     try {
       const conversation = await createConversation(userName, owner, textMessage);
       const sockets = await io.fetchSockets();
+      const roomName = userName + owner.name;
+      socket.join(roomName);
       let userToSocketId = null;
 
       sockets.forEach((socket) => {
         if (socket.handshake.auth.user.name === userName) {
           userToSocketId = socket.id;
+          socket.join(roomName);
         }
       });
-      console.log(userToSocketId);
       if (userToSocketId) {
-        socket.to(userToSocketId).emit("openConversation", conversation);
+        io.to(roomName).emit("openConversation", conversation);
       }
+      let roomUsers = await io.in(roomName).fetchSockets();
+      console.log("room users", roomUsers);
       callback({ success: "Conversation created" });
     } catch (e: any) {
       console.log(e);
