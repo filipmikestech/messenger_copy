@@ -12,7 +12,6 @@ export const ConversationPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (user) {
-      console.log("conv user", user);
       socket.auth = { user: user };
       socket.connect();
     }

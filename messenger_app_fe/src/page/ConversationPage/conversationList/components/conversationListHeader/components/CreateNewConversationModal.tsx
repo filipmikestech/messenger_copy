@@ -14,7 +14,7 @@ export const CreateNewConversationModal = ({ open, handleClose }: CreateNewConve
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    socket.emit("openConversation", nameForm, (response: ErrorType) => {
+    socket.emit("openConversation", nameForm, "test message", (response: ErrorType) => {
       console.log(response);
       if (response.error) {
         toast.error(response.error);
@@ -26,7 +26,7 @@ export const CreateNewConversationModal = ({ open, handleClose }: CreateNewConve
   };
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Set backup account</DialogTitle>
+      <DialogTitle>Start new conversation</DialogTitle>
       <form className=" flex flex-col gap-4 min-w-[400px] w-full p-5 rounded-3xl" onSubmit={handleSubmit}>
         <TextField label="Name" placeholder="Input your name" value={nameForm} onChange={(e) => setNameForm(e.target.value)} />
         <Button sx={{ backgroundColor: "#0098fe" }} type="submit" variant="contained">

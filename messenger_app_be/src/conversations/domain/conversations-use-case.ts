@@ -6,7 +6,7 @@ export const getAllConversations = async (userId: string) => {
   return await conversationsRepository.getAllConversations(userId);
 };
 
-export const createConversation = async (userNameJoiner: string, owner: User) => {
+export const createConversation = async (userNameJoiner: string, owner: User, textMessage: string) => {
   console.log("userNameJoiner", userNameJoiner);
   const joiner = await loginRepository.getUser(userNameJoiner);
   console.log("joiner", joiner);
@@ -20,5 +20,7 @@ export const createConversation = async (userNameJoiner: string, owner: User) =>
     throw Error("Conversation already exists");
   }
 
-  return await conversationsRepository.createConversation(joiner.id, owner.id);
+  const createdConversation = await conversationsRepository.createConversation(joiner.id, owner.id, textMessage && textMessage);
+
+  return createdConversation;
 };

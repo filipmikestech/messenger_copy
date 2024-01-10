@@ -5,11 +5,11 @@ type ErrorType = { error?: string; success?: string };
 export default function defineConversationsWebsockets(io: Server, socket: Socket) {
   const owner = socket.handshake.auth.user;
 
-  socket.on("openConversation", async (userName: string, callback: (error: ErrorType) => void) => {
+  socket.on("openConversation", async (userName: string, textMessage: string, callback: (error: ErrorType) => void) => {
     console.log("openConversation", userName);
 
     try {
-      const conversation = await createConversation(userName, owner);
+      const conversation = await createConversation(userName, owner, textMessage);
       const sockets = await io.fetchSockets();
       let userToSocketId = null;
 

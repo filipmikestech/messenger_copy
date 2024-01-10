@@ -8,7 +8,7 @@ export const getAllConversations = async (userId: string): Promise<Conversation[
         some: { id: userId },
       },
     },
-    include: { Users: true },
+    include: { Users: true, Messages: true },
   });
 };
 
@@ -31,10 +31,11 @@ export const getConversationByUsers = async (user1Id: string, user2Id: string) =
   });
 };
 
-export const createConversation = async (user1Id: string, user2Id: string) => {
+export const createConversation = async (joinerId: string, ownerId: string, messageText?: string) => {
   return await prisma.conversation.create({
     data: {
-      Users: { connect: [{ id: user1Id }, { id: user2Id }] },
+      Users: { connect: [{ id: joinerId }, { id: ownerId }] },
+      Messages: messageText ? { create: { text: messageText, userId: ownerId } } : {},
     },
     include: { Users: true },
   });
