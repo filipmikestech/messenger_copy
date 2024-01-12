@@ -7,9 +7,6 @@ export default function defineConversationsRoutes(expressApp: express.Applicatio
   router.get("/", async (req, res, next) => {
     console.log("cool", req.userId);
     const userId = req.userId;
-    if (!userId) {
-      return res.status(400).send("Not logged in");
-    }
     try {
       console.log("Getting conversations list");
       const conversationsList = await conversationsUseCase.getAllConversations(userId);

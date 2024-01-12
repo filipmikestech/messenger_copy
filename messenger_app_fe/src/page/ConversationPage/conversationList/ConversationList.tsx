@@ -38,7 +38,7 @@ export const ConversationList = () => {
         // @ts-ignore
         const otherUserArray = conversation.Users?.filter((currentUser) => currentUser.id !== user?.id);
         const otherUser = otherUserArray?.length ? otherUserArray[0] : null;
-        return <ConversationSelector key={conversation.id} name={otherUser?.name ?? ""} />;
+        return <ConversationSelector key={conversation.id} name={otherUser?.name ?? ""} conversationId={conversation.id} />;
       })}
     </div>
   );

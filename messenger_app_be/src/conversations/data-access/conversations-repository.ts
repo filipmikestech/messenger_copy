@@ -8,7 +8,7 @@ export const getAllConversations = async (userId: string): Promise<Conversation[
         some: { id: userId },
       },
     },
-    include: { Users: true, Messages: true },
+    include: { Users: true },
   });
 };
 
