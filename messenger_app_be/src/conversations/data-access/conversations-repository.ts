@@ -35,7 +35,7 @@ export const createConversation = async (joinerId: string, ownerId: string, mess
   return await prisma.conversation.create({
     data: {
       Users: { connect: [{ id: joinerId }, { id: ownerId }] },
-      Messages: messageText ? { create: { text: messageText, userId: ownerId } } : {},
+      Messages: messageText ? { create: { text: messageText, userId: ownerId, created: new Date() } } : {},
     },
     include: { Users: true },
   });

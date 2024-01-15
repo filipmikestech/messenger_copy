@@ -18,4 +18,5 @@ export interface Message {
   conversation: Conversation;
   text: string;
   conversationId: string;
+  created: Date;
 }

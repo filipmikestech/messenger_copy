@@ -30,5 +30,5 @@ model Message {
   conversation   Conversation @relation(fields: [conversationId], references: [id])
   text           String
   conversationId String
-  // created        DateTime
+  created        DateTime
 }

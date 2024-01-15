@@ -1,7 +1,7 @@
 import { prisma } from "../../../prisma/prismaInstance.js";
 
 export const getAllMessagesInConversation = async (conversationId: string) => {
-  return await prisma.message.findMany({ where: { conversationId: conversationId } });
+  return await prisma.message.findMany({ where: { conversationId: conversationId }, include: { user: true } });
 };
 
 export const createMessage = async (text: string, conversationId: string, userId: string) => {
@@ -10,6 +10,7 @@ export const createMessage = async (text: string, conversationId: string, userId
       text: text,
       conversationId: conversationId,
       userId: userId,
+      created: new Date(),
     },
   });
 };

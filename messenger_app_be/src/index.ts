@@ -23,6 +23,8 @@ const port = process.env.PORT;
 
 expressApp.use(express.json());
 
+defineLoginRoutes(expressApp);
+
 expressApp.use((req, res, next) => {
   const userId = req.headers.authorization;
   if (!userId) {
@@ -34,7 +36,7 @@ expressApp.use((req, res, next) => {
 });
 
 defineConversationsRoutes(expressApp);
-defineLoginRoutes(expressApp);
+
 defineMessagesRoutes(expressApp);
 
 const server = expressApp.listen(port, () => {
