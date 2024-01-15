@@ -136,3 +136,30 @@ I am making commits based on each video. So you can download each corresponding 
 - Custom Request Type
 - Changing backend
 - Fixing issues
+
+## 17. [Video](https://youtu.be/bCszOAFDOVg?si=AUEZqHLztzGKdc1I):
+
+- Analyzing the difficulty of adding the first message
+- Adding it to backend
+- Trying to remove messages
+
+## 18. [Video](https://youtu.be/crymY7kU3K0?si=s0k0h_oBYCgUQzox):
+
+- Adding text area
+- Changing it to text field
+- Fixing not showing conversation for sender
+
+## 19. [Video](https://youtu.be/fiCKqdFS2kk?si=Up5S7949adcsTipa):
+
+- Adding messages to the backend
+- Hardcore thinking
+
+## 20. [Video](https://youtu.be/fz1qsWGGF98?si=1xaxDJmY3tthWb7X):
+
+- Refactor conversation page
+- Adding child route
+- Getting params from URL
+- Fetching messages
+- Adding created field to messages
+- Fixing login middleware
+- Highlighting selected conversation
