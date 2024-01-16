@@ -1,9 +1,9 @@
-import { Message } from "../../../schema";
+import { Conversation } from "../../../schema";
 import { api } from "../../../utils/axiosIntance";
 
 export const ConversationService = {
-  async getMessages(conversationId: string) {
-    const { data } = await api.post<Message[]>("/messages", { conversationId: conversationId });
+  async getConversation(conversationId: string) {
+    const { data } = await api.get<Conversation>(`/conversation/${conversationId}`);
     return data;
   },
 };

@@ -6,6 +6,10 @@ export const getAllConversations = async (userId: string) => {
   return await conversationsRepository.getAllConversations(userId);
 };
 
+export const getConversation = async (conversationId: string) => {
+  return await conversationsRepository.getConversation(conversationId);
+};
+
 export const createConversation = async (userNameJoiner: string, owner: User, textMessage: string) => {
   console.log("userNameJoiner", userNameJoiner);
   const joiner = await loginRepository.getUser(userNameJoiner);

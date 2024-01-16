@@ -12,6 +12,10 @@ export const getAllConversations = async (userId: string): Promise<Conversation[
   });
 };
 
+export const getConversation = async (conversationId: string) => {
+  return await prisma.conversation.findFirst({ where: { id: conversationId }, include: { Users: true } });
+};
+
 export const getConversationByUsers = async (user1Id: string, user2Id: string) => {
   return await prisma.conversation.findFirst({
     where: {

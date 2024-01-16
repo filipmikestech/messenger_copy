@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ProfileImage } from "../../../../compoments/ProfileImage";
-import useLocalStorage from "../../../../hooks/useLocalstorage";
-import { Message, User } from "../../../../schema";
-import { ConversationService } from "../conversation.service";
+import { ProfileImage } from "../../../../../compoments/ProfileImage";
+import useLocalStorage from "../../../../../hooks/useLocalstorage";
+import { Message, User } from "../../../../../schema";
+import { MessengesService } from "./messeges.service";
 
 export const ConversationMessages = () => {
   const { conversationId } = useParams();
@@ -12,7 +12,7 @@ export const ConversationMessages = () => {
   const getData = async () => {
     let messages: Message[] = [];
     if (conversationId) {
-      messages = await ConversationService.getMessages(conversationId);
+      messages = await MessengesService.getMessages(conversationId);
     }
     setMessages(messages);
   };
