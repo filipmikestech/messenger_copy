@@ -163,3 +163,12 @@ I am making commits based on each video. So you can download each corresponding 
 - Adding created field to messages
 - Fixing login middleware
 - Highlighting selected conversation
+
+## 21. [Video](https://youtu.be/ROKuGtiYDns?si=uMurns5-K0HrE8aT):
+
+- Logged in name
+- Added get conversation to the backend
+- Added get conversation to the frontend
+- Fixing issue with request params
+- Fixing issue with lazy fetching
+- Added users array to frontend
