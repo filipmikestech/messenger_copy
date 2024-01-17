@@ -7,7 +7,7 @@ export const getAllConversations = async (userId: string) => {
 };
 
 export const getConversation = async (conversationId: string) => {
-  return await conversationsRepository.getConversation(conversationId);
+  return await conversationsRepository.getConversationUsersMessages(conversationId);
 };
 
 export const createConversation = async (userNameJoiner: string, owner: User, textMessage: string) => {

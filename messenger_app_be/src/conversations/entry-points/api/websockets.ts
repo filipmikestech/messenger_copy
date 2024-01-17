@@ -12,6 +12,7 @@ export default function defineConversationsWebsockets(io: Server, socket: Socket
       const conversation = await createConversation(userName, owner, textMessage);
       const sockets = await io.fetchSockets();
       const roomName = userName + owner.name;
+
       socket.join(roomName);
       let userToSocketId = null;
 
@@ -24,8 +25,10 @@ export default function defineConversationsWebsockets(io: Server, socket: Socket
       if (userToSocketId) {
         io.to(roomName).emit("openConversation", conversation);
       }
+
+      console.log("room name open conversation", roomName);
+      console.log("rooms conversation", io.sockets.adapter.rooms);
       let roomUsers = await io.in(roomName).fetchSockets();
-      console.log("room users", roomUsers);
       callback({ success: "Conversation created" });
     } catch (e: any) {
       console.log(e);

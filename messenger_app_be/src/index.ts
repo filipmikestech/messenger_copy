@@ -6,6 +6,7 @@ import defineConversationsRoutes from "./conversations/entry-points/api/routes.j
 import defineConversationsWebsockets from "./conversations/entry-points/api/websockets.js";
 import defineLoginRoutes from "./login/entry-points/api/login-routes.js";
 import defineMessagesRoutes from "./messages/entry-points/routes.js";
+import defineMessagesWebsockets from "./messages/entry-points/websockets.js";
 
 declare global {
   namespace Express {
@@ -47,4 +48,5 @@ const io = new Server(server, { cors: { origin: "*" } });
 
 io.on("connection", (socket) => {
   defineConversationsWebsockets(io, socket);
+  defineMessagesWebsockets(io, socket);
 });
