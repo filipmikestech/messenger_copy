@@ -17,6 +17,9 @@ export const createMessage = async (text: string, conversationId: string, userId
 
 export const addMessageToConversation = async (text: string, userId: string, conversationId: string) => {
   console.log("addMessageToConversation repo", text);
-  const message = await prisma.message.create({ data: { text: text, userId: userId, conversationId: conversationId, created: new Date() } });
+  const message = await prisma.message.create({
+    data: { text: text, userId: userId, conversationId: conversationId, created: new Date() },
+    include: { user: true },
+  });
   return message;
 };

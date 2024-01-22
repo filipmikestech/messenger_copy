@@ -17,6 +17,7 @@ export const MessageTextInput = () => {
     e.preventDefault();
     console.log("message submited", conversationId, inputText);
     socket.emit("sendMessage", conversationId, inputText);
+    setInputText("");
   };
 
   return (
