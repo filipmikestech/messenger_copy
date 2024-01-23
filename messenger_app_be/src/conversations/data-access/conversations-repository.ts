@@ -1,4 +1,4 @@
-import { Conversation } from "@prisma/client";
+import { Conversation, User } from "@prisma/client";
 import { prisma } from "../../../prisma/prismaInstance.js";
 
 export const getAllConversations = async (userId: string): Promise<Conversation[]> => {
@@ -49,5 +49,13 @@ export const createConversation = async (joinerId: string, ownerId: string, mess
       Messages: messageText ? { create: { text: messageText, userId: ownerId, created: new Date() } } : {},
     },
     include: { Users: true },
+  });
+};
+
+export const saveRoomName = async (users: User[]) => {
+  return await prisma.rooms.create({
+    data: {
+      Users: { connect: users },
+    },
   });
 };

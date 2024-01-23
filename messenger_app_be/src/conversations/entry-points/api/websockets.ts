@@ -9,9 +9,9 @@ export default function defineConversationsWebsockets(io: Server, socket: Socket
     console.log("openConversation", userName);
 
     try {
-      const conversation = await createConversation(userName, owner, textMessage);
+      const { createdConversation, room } = await createConversation(userName, owner, textMessage);
       const sockets = await io.fetchSockets();
-      const roomName = userName + owner.name;
+      const roomName = room.id;
 
       socket.join(roomName);
       let userToSocketId = null;
@@ -23,12 +23,11 @@ export default function defineConversationsWebsockets(io: Server, socket: Socket
         }
       });
       if (userToSocketId) {
-        io.to(roomName).emit("openConversation", conversation);
+        io.to(roomName).emit("openConversation", createdConversation);
       }
 
       console.log("room name open conversation", roomName);
       console.log("rooms conversation", io.sockets.adapter.rooms);
-      let roomUsers = await io.in(roomName).fetchSockets();
       callback({ success: "Conversation created" });
     } catch (e: any) {
       console.log(e);

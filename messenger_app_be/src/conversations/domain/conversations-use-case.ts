@@ -25,6 +25,6 @@ export const createConversation = async (userNameJoiner: string, owner: User, te
   }
 
   const createdConversation = await conversationsRepository.createConversation(joiner.id, owner.id, textMessage && textMessage);
-
-  return createdConversation;
+  const room = await conversationsRepository.saveRoomName([joiner, owner]);
+  return { createdConversation, room };
 };
