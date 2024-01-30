@@ -15,8 +15,7 @@ model User {
   name          String         @unique @db.VarChar(255)
   Messages      Message[]
   Conversations Conversation[]
-  Rooms         Rooms?         @relation(fields: [roomsId], references: [id])
-  roomsId       String?
+  Rooms         Rooms[]
 }
 
 model Conversation {

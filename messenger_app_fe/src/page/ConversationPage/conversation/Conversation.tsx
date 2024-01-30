@@ -25,11 +25,9 @@ export const Conversation = () => {
   }, [conversationId]);
 
   return (
-    <div className=" flex flex-col w-full h-full">
-      <div className="w-full h-full p-3 bg-mainBgColor flex flex-col">
-        <ConversationHeader users={conversation?.Users} />
-        <ConversationMessages messages={conversation?.Messages ?? []} />
-      </div>
+    <div className="w-full h-full p-3 bg-mainBgColor flex flex-col">
+      <ConversationHeader users={conversation?.Users} />
+      <ConversationMessages messages={conversation?.Messages ?? []} />
       <MessageTextInput />
     </div>
   );

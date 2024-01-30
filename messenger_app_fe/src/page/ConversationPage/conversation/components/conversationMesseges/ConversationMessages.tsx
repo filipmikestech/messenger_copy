@@ -33,7 +33,7 @@ export const ConversationMessages = ({ messages }: ConversationMessagesProps) =>
   }, [messages]);
 
   return (
-    <div className=" h-full flex flex-col-reverse gap-2">
+    <div className=" h-full flex flex-col-reverse gap-2 overflow-y-auto">
       {messagesState
         .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
         .map((obj, index) => {
