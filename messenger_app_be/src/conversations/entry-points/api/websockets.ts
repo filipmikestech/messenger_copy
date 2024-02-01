@@ -25,17 +25,15 @@ export default function defineConversationsWebsockets(io: Server, socket: Socket
       const roomName = room.id;
 
       socket.join(roomName);
-      let userToSocketId = null;
 
       sockets.forEach((socket) => {
         if (socket.handshake.auth.user.name === userName) {
-          userToSocketId = socket.id;
           socket.join(roomName);
         }
       });
-      if (userToSocketId) {
-        io.to(roomName).emit("openConversation", createdConversation);
-      }
+
+      console.log("emit open conversation", createdConversation);
+      io.to(roomName).emit("openConversation", createdConversation);
 
       console.log("room name open conversation", roomName);
       console.log("rooms conversation", io.sockets.adapter.rooms);

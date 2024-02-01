@@ -9,7 +9,7 @@ import { ConversationListService } from "./conversationList.service";
 export const ConversationList = () => {
   const [conversationList, setConversationList] = useState<Conversation[]>([]);
   const [user] = useLocalStorage<User | null>("loginUser", null);
-  console.log(conversationList);
+  console.log("conversationList", conversationList);
 
   const getData = async () => {
     const data = await ConversationListService.getConversationList();
@@ -19,7 +19,7 @@ export const ConversationList = () => {
     getData();
 
     socket.on("openConversation", (conversation) => {
-      console.log(conversation);
+      console.log("openConversation", conversation);
       if (conversation) {
         setConversationList((conversationList) => [...conversationList, conversation]);
       }
