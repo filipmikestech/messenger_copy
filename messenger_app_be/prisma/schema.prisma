@@ -15,7 +15,6 @@ model User {
   name          String         @unique @db.VarChar(255)
   Messages      Message[]
   Conversations Conversation[]
-  Rooms         Rooms[]
 }
 
 model Conversation {
@@ -32,9 +31,4 @@ model Message {
   text           String
   conversationId String
   created        DateTime
-}
-
-model Rooms {
-  id    String @id @default(uuid())
-  Users User[]
 }

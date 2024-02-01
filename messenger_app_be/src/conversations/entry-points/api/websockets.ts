@@ -4,9 +4,9 @@ import { createConversation } from "../../domain/conversations-use-case.js";
 type ErrorType = { error?: string; success?: string };
 
 const subscribeToRooms = async (userId: string, socket: Socket) => {
-  const user = await prisma.user.findFirst({ where: { id: userId }, include: { Rooms: true } });
-  user?.Rooms.forEach((room) => {
-    socket.join(room.id);
+  const user = await prisma.user.findFirst({ where: { id: userId }, include: { Conversations: true } });
+  user?.Conversations.forEach((conversation) => {
+    socket.join(conversation.id);
   });
 };
 
@@ -20,9 +20,9 @@ export default function defineConversationsWebsockets(io: Server, socket: Socket
     console.log("openConversation", userName);
 
     try {
-      const { createdConversation, room } = await createConversation(userName, owner, textMessage);
+      const createdConversation = await createConversation(userName, owner, textMessage);
       const sockets = await io.fetchSockets();
-      const roomName = room.id;
+      const roomName = createdConversation.id;
 
       socket.join(roomName);
 

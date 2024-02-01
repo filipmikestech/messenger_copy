@@ -23,7 +23,5 @@ export const createConversation = async (userNameJoiner: string, owner: User, te
     throw Error("Conversation already exists");
   }
 
-  const createdConversation = await conversationsRepository.createConversation(joiner.id, owner.id, textMessage && textMessage);
-  const room = await conversationsRepository.saveRoomName([joiner, owner]);
-  return { createdConversation, room };
+  return await conversationsRepository.createConversation(joiner.id, owner.id, textMessage && textMessage);
 };
