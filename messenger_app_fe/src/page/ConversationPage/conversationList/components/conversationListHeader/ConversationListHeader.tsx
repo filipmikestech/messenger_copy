@@ -21,8 +21,12 @@ export const ConversationListHeader = () => {
   };
   const handleCloseLogout = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
     localStorage.removeItem("loginUser");
     navigate("/login");
+    handleCloseLogout();
   };
 
   return (
@@ -41,7 +45,7 @@ export const ConversationListHeader = () => {
             "aria-labelledby": "actions-button",
           }}
         >
-          <MenuItem onClick={handleCloseLogout}>Log out</MenuItem>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
         <div className="flex-1 flex justify-center font-bold text-xl items-center text-darkTextColor">Messenger</div>
         <div className="flex-1 flex justify-end items-center">

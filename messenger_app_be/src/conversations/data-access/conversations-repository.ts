@@ -51,3 +51,11 @@ export const createConversation = async (joinerId: string, ownerId: string, mess
     include: { Users: true },
   });
 };
+
+export const deleteConversation = async (conversationId: string) => {
+  return await prisma.conversation.delete({
+    where: {
+      id: conversationId,
+    },
+  });
+};

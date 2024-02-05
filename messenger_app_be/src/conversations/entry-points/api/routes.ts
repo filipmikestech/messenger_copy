@@ -25,5 +25,13 @@ export default function defineConversationsRoutes(expressApp: express.Applicatio
     return res.status(200).send(conversation);
   });
 
+  router.delete("/:conversationId", async (req, res, next) => {
+    const { conversationId } = req.params;
+    const result = await conversationsUseCase.deleteConversation(conversationId);
+    console.log("result delete", result);
+
+    return res.status(200).send();
+  });
+
   expressApp.use("/api/conversation", router);
 }

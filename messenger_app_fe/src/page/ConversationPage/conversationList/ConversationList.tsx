@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import useLocalStorage from "../../../hooks/useLocalstorage";
 import { Conversation, User } from "../../../schema";
 import { socket } from "../../../utils/socketIntance";
@@ -10,7 +11,9 @@ export const ConversationList = () => {
   const [conversationList, setConversationList] = useState<Conversation[]>([]);
   const [user] = useLocalStorage<User | null>("loginUser", null);
   console.log("conversationList", conversationList);
-
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log("location", location);
   const getData = async () => {
     const data = await ConversationListService.getConversationList();
     setConversationList(data);
@@ -30,6 +33,14 @@ export const ConversationList = () => {
       socket.off("openConversation");
     };
   }, []);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      if (conversationList.length > 0) {
+        navigate(conversationList[0].id);
+      }
+    }
+  }, [conversationList, location]);
 
   return (
     <div className=" h-full w-[400px] bg-sideBgColor flex-shrink-0">

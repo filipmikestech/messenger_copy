@@ -25,3 +25,7 @@ export const createConversation = async (userNameJoiner: string, owner: User, te
 
   return await conversationsRepository.createConversation(joiner.id, owner.id, textMessage && textMessage);
 };
+
+export const deleteConversation = async (conversationId: string) => {
+  return await conversationsRepository.deleteConversation(conversationId);
+};
