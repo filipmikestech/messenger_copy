@@ -8,7 +8,7 @@ export const getAllConversations = async (userId: string): Promise<Conversation[
         some: { id: userId },
       },
     },
-    include: { Users: true },
+    include: { Users: true, Messages: true },
   });
 };
 
@@ -48,7 +48,7 @@ export const createConversation = async (joinerId: string, ownerId: string, mess
       Users: { connect: [{ id: joinerId }, { id: ownerId }] },
       Messages: messageText ? { create: { text: messageText, userId: ownerId, created: new Date() } } : {},
     },
-    include: { Users: true },
+    include: { Users: true, Messages: true },
   });
 };
 

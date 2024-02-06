@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { ProfileImage } from "../../../../compoments/ProfileImage";
+import { Message } from "../../../../schema";
 
-export const ConversationSelector = ({ name, conversationId }: { name: string; conversationId: string }) => {
+export const ConversationSelector = ({ name, conversationId, lastMessage }: { name: string; conversationId: string; lastMessage: Message | null }) => {
   const navigate = useNavigate();
   const { conversationId: conversationIdParams } = useParams();
   const isConversationSelected = conversationId === conversationIdParams;
@@ -14,7 +15,7 @@ export const ConversationSelector = ({ name, conversationId }: { name: string; c
       <div className="flex flex-col justify-center">
         <div className="  font-semibold">{name}</div>
         <div className=" text-[14px] text-lightTextColor">
-          Beginning of last message · <span>14m</span>
+          {lastMessage?.text.substring(0, 20)} · <span>14m</span>
         </div>
       </div>
     </div>

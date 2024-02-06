@@ -19,12 +19,11 @@ export const ConversationList = () => {
     setConversationList(data);
   };
   useEffect(() => {
-    getData();
-
     socket.on("openConversation", (conversation) => {
       console.log("openConversation", conversation);
       if (conversation) {
         setConversationList((conversationList) => [...conversationList, conversation]);
+        navigate(conversation.id);
       }
       console.log(socket.id);
     });
@@ -35,21 +34,34 @@ export const ConversationList = () => {
   }, []);
 
   useEffect(() => {
+    getData();
+  }, [location]);
+
+  useEffect(() => {
     if (location.pathname === "/") {
       if (conversationList.length > 0) {
+        console.log("navigate called", conversationList);
         navigate(conversationList[0].id);
       }
     }
-  }, [conversationList, location]);
+  }, [conversationList]);
 
   return (
     <div className=" h-full w-[400px] bg-sideBgColor flex-shrink-0">
       <ConversationListHeader />
       {conversationList.map((conversation) => {
+        console.log(conversation);
         // @ts-ignore
         const otherUserArray = conversation.Users?.filter((currentUser) => currentUser.id !== user?.id);
         const otherUser = otherUserArray?.length ? otherUserArray[0] : null;
-        return <ConversationSelector key={conversation.id} name={otherUser?.name ?? ""} conversationId={conversation.id} />;
+        return (
+          <ConversationSelector
+            key={conversation.id}
+            name={otherUser?.name ?? ""}
+            conversationId={conversation.id}
+            lastMessage={conversation.Messages && conversation.Messages[conversation.Messages.length - 1]}
+          />
+        );
       })}
     </div>
   );

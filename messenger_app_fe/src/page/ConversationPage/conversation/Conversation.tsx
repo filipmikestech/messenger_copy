@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Conversation as ConversationType } from "../../../schema";
 import { ConversationHeader } from "./components/ConversationHeader";
 import { MessageTextInput } from "./components/MessageTextInput";
@@ -9,13 +9,18 @@ import { ConversationService } from "./conversation.service";
 export const Conversation = () => {
   const { conversationId } = useParams();
   const [conversation, setConversation] = useState<ConversationType>();
+  const navigate = useNavigate();
   console.log(conversationId);
 
   const getData = async () => {
     let conversation: ConversationType | null = null;
     if (conversationId) {
       conversation = await ConversationService.getConversation(conversationId);
-      setConversation(conversation);
+      if (conversation) {
+        setConversation(conversation);
+      } else {
+        navigate("/");
+      }
     }
     console.log("one conversation", conversation);
   };
