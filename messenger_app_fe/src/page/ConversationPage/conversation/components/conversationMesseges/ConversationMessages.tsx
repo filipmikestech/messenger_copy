@@ -43,13 +43,19 @@ export const ConversationMessages = ({ messages, conversationId }: ConversationM
       {messagesState
         .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
         .map((obj, index) => {
-          console.log("messagesState", messagesState);
-          const isNewUser = index > 0 && messagesState[index - 1].user !== obj.user;
+          const isNewUser = (index > 0 && messagesState[index - 1].user.id !== obj.user.id) || index === 0;
+          console.log("ConversationMessages , obj.user:", obj.user);
+          console.log("ConversationMessages , messagesState[index - 1].user:", index > 0 && messagesState[index - 1].user);
           const isLoggedInUser = obj.user.id === loggedInUser?.id;
+          console.log("message", obj);
+          console.log("isNewUser", isNewUser);
+          console.log("isLoggedInUser", isLoggedInUser);
+          console.log("ConversationMessages , loggedInUser:", loggedInUser);
+          console.log("ConversationMessages , obj.user.id:", obj.user.id);
 
           return (
             <div className={` flex ${isLoggedInUser ? "justify-end" : "justify-start"} ${isNewUser && "mb-4"}`} key={obj.created + obj.text}>
-              {isNewUser && <ProfileImage />}
+              {isNewUser && !isLoggedInUser && <ProfileImage />}
               <div
                 className={` ${isLoggedInUser ? "bg-messengerColor" : " bg-inputLightBgColor"} ${
                   isNewUser ? "ml-2" : "ml-[48px]"

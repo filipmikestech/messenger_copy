@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProfileImage } from "../../../../compoments/ProfileImage";
 import { Message } from "../../../../schema";
@@ -7,6 +8,9 @@ export const ConversationSelector = ({ name, conversationId, lastMessage }: { na
   const navigate = useNavigate();
   const lastMessageFromWS = useAppStore((state) => state.lastMessage);
   const isCurrectMessage = lastMessageFromWS && lastMessageFromWS?.conversationId === conversationId;
+  const lastMessageTime = lastMessage && moment(lastMessage.created).format("HH:mm");
+  const lastMessageFromWSTime = lastMessageFromWS && moment(lastMessageFromWS.created).format("HH:mm");
+
   const { conversationId: conversationIdParams } = useParams();
   const isConversationSelected = conversationId === conversationIdParams;
   return (
@@ -18,7 +22,15 @@ export const ConversationSelector = ({ name, conversationId, lastMessage }: { na
       <div className="flex flex-col justify-center">
         <div className="  font-semibold">{name}</div>
         <div className=" text-[14px] text-lightTextColor">
-          {isCurrectMessage ? lastMessageFromWS.text : lastMessage?.text.substring(0, 20)} · <span>14m</span>
+          {isCurrectMessage ? (
+            <span>
+              {lastMessageFromWS.text} · <span>{lastMessageFromWSTime}</span>
+            </span>
+          ) : (
+            <span>
+              {lastMessage?.text.substring(0, 20)} · <span>{lastMessageTime}</span>
+            </span>
+          )}
         </div>
       </div>
     </div>

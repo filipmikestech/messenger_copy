@@ -16,7 +16,9 @@ export const MessageTextInput = () => {
   const submitMessage = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("message submited", conversationId, inputText);
-    socket.emit("sendMessage", conversationId, inputText);
+    if (inputText !== "") {
+      socket.emit("sendMessage", conversationId, inputText);
+    }
     setInputText("");
   };
 
