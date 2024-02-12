@@ -2,15 +2,18 @@ import { useEffect, useState } from "react";
 import { ProfileImage } from "../../../../../compoments/ProfileImage";
 import useLocalStorage from "../../../../../hooks/useLocalstorage";
 import { Message, User } from "../../../../../schema";
+import { useAppStore } from "../../../../../store/useStore";
 import { socket } from "../../../../../utils/socketIntance";
 
 type ConversationMessagesProps = {
   messages: Message[];
+  conversationId?: string;
 };
 
-export const ConversationMessages = ({ messages }: ConversationMessagesProps) => {
+export const ConversationMessages = ({ messages, conversationId }: ConversationMessagesProps) => {
   const [loggedInUser] = useLocalStorage<User | null>("loginUser", null);
   const [messagesState, setMessagesState] = useState<Message[]>(messages);
+  const setLastMessage = useAppStore((state) => state.setLastMessage);
   console.log("messages", messages);
 
   console.log("messages state", messagesState);
@@ -18,7 +21,10 @@ export const ConversationMessages = ({ messages }: ConversationMessagesProps) =>
     socket.on("sendMessage", (message) => {
       console.log("message from be", message);
       if (message) {
-        setMessagesState((messages) => [...messages, message]);
+        if (message.conversationId === conversationId) {
+          setMessagesState((messages) => [...messages, message]);
+        }
+        setLastMessage(message);
       }
       console.log(socket.id);
     });
