@@ -10,7 +10,6 @@ export const Conversation = () => {
   const { conversationId } = useParams();
   const [conversation, setConversation] = useState<ConversationType>();
   const navigate = useNavigate();
-  console.log(conversationId);
 
   const getData = async () => {
     let conversation: ConversationType | null = null;
@@ -22,7 +21,6 @@ export const Conversation = () => {
         navigate("/");
       }
     }
-    console.log("one conversation", conversation);
   };
 
   useEffect(() => {

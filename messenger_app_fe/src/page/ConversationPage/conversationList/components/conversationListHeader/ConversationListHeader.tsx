@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ProfileImage } from "../../../../../compoments/ProfileImage";
 import useLocalStorage from "../../../../../hooks/useLocalstorage";
 import { User } from "../../../../../schema";
+import { socket } from "../../../../../utils/socketIntance";
 import { CreateNewConversationModal } from "./components/CreateNewConversationModal";
 import { Search } from "./components/Search";
 export const ConversationListHeader = () => {
@@ -25,6 +26,7 @@ export const ConversationListHeader = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("loginUser");
+    socket.disconnect();
     navigate("/login");
     handleCloseLogout();
   };

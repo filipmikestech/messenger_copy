@@ -16,7 +16,6 @@ export const CreateNewConversationModal = ({ open, handleClose }: CreateNewConve
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     socket.emit("openConversation", nameForm, messageForm, (response: ErrorType) => {
-      console.log(response);
       if (response.error) {
         toast.error(response.error);
       }

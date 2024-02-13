@@ -11,14 +11,11 @@ export const getConversation = async (conversationId: string) => {
 };
 
 export const createConversation = async (userNameJoiner: string, owner: User, textMessage: string) => {
-  console.log("userNameJoiner", userNameJoiner);
   const joiner = await loginRepository.getUser(userNameJoiner);
-  console.log("joiner", joiner);
   if (!joiner) {
     throw Error("User not found");
   }
   const conversationByOwnerAndJoinerExists = await conversationsRepository.getConversationByUsers(owner.id, joiner.id);
-  console.log("conversationByOwnerAndJoinerExists", conversationByOwnerAndJoinerExists);
   if (conversationByOwnerAndJoinerExists) {
     throw Error("Conversation already exists");
   }

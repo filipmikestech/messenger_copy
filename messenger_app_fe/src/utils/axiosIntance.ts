@@ -7,6 +7,7 @@ export const api = axios.create({
 api.interceptors.request.use(function (config) {
   const userString = localStorage.getItem("loginUser");
   const user = userString ? JSON.parse(userString) : null;
+  console.log("interceptor user", user);
   config.headers.Authorization = user ? user.id : "";
   return config;
 });

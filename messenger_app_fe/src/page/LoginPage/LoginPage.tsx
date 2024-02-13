@@ -7,17 +7,17 @@ import { loginService } from "./loginPage.service";
 
 export const LoginPage = () => {
   const [nameForm, setNameForm] = useState("");
-  const [_, setUser] = useLocalStorage<User | null>("loginUser", null);
+  const [loginUser, setUser] = useLocalStorage<User | null>("loginUser", null);
+  console.log("LoginPage , loginUser:", loginUser);
   const navigate = useNavigate();
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const user = await loginService.login(nameForm);
+    console.log("handleSubmit , user:", user);
     if (user) {
       setUser(user);
       navigate("/");
     }
-    console.log(user);
   };
   return (
     <div className="w-screen h-screen flex flex-col gap-8 justify-center items-center">

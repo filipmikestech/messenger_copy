@@ -17,8 +17,6 @@ export default function defineConversationsWebsockets(io: Server, socket: Socket
   subscribeToRooms(owner.id, socket);
 
   socket.on("openConversation", async (userName: string, textMessage: string, callback: (error: ErrorType) => void) => {
-    console.log("openConversation", userName);
-
     try {
       const createdConversation = await createConversation(userName, owner, textMessage);
       const sockets = await io.fetchSockets();
@@ -32,11 +30,7 @@ export default function defineConversationsWebsockets(io: Server, socket: Socket
         }
       });
 
-      console.log("emit open conversation", createdConversation);
       io.to(roomName).emit("openConversation", createdConversation);
-
-      console.log("room name open conversation", roomName);
-      console.log("rooms conversation", io.sockets.adapter.rooms);
       callback({ success: "Conversation created" });
     } catch (e: any) {
       console.log(e);

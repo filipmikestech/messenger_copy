@@ -4,8 +4,6 @@ export const getAllMessagesByConversation = async (conversationId: string) => {
 };
 
 export const addMessageToConversation = async (text: string, userId: string, conversationId: string) => {
-  console.log("addMessageToConversation", text);
-
   const message = await messagesRepository.addMessageToConversation(text, userId, conversationId);
   return message;
 };

@@ -14,25 +14,20 @@ export const ConversationMessages = ({ messages, conversationId }: ConversationM
   const [loggedInUser] = useLocalStorage<User | null>("loginUser", null);
   const [messagesState, setMessagesState] = useState<Message[]>(messages);
   const setLastMessage = useAppStore((state) => state.setLastMessage);
-  console.log("messages", messages);
-
-  console.log("messages state", messagesState);
   useEffect(() => {
     socket.on("sendMessage", (message) => {
-      console.log("message from be", message);
       if (message) {
         if (message.conversationId === conversationId) {
           setMessagesState((messages) => [...messages, message]);
         }
         setLastMessage(message);
       }
-      console.log(socket.id);
     });
 
     return () => {
       socket.off("sendMessage");
     };
-  }, []);
+  }, [conversationId]);
 
   useEffect(() => {
     setMessagesState(messages);
@@ -44,14 +39,7 @@ export const ConversationMessages = ({ messages, conversationId }: ConversationM
         .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
         .map((obj, index) => {
           const isNewUser = (index > 0 && messagesState[index - 1].user.id !== obj.user.id) || index === 0;
-          console.log("ConversationMessages , obj.user:", obj.user);
-          console.log("ConversationMessages , messagesState[index - 1].user:", index > 0 && messagesState[index - 1].user);
           const isLoggedInUser = obj.user.id === loggedInUser?.id;
-          console.log("message", obj);
-          console.log("isNewUser", isNewUser);
-          console.log("isLoggedInUser", isLoggedInUser);
-          console.log("ConversationMessages , loggedInUser:", loggedInUser);
-          console.log("ConversationMessages , obj.user.id:", obj.user.id);
 
           return (
             <div className={` flex ${isLoggedInUser ? "justify-end" : "justify-start"} ${isNewUser && "mb-4"}`} key={obj.created + obj.text}>

@@ -7,6 +7,7 @@ export default {
         mainBgColor: "white",
         sideBgColor: "#ececec",
         hoverColor: "#e3e3e3",
+        unReadMessageColor: "#e3e3e3",
         darkTextColor: "#202e24",
         lightTextColor: "#919191",
         inputBgColor: "#e3e3e3",

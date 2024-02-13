@@ -16,9 +16,6 @@ export const ConversationPage = () => {
     if (!user) {
       navigate("/login");
     }
-    socket.on("connect", () => {
-      console.log(socket.id);
-    });
   }, []);
 
   return (

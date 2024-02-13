@@ -4,17 +4,15 @@ import { addMessageToConversation } from "../domain/messages-use-case.js";
 
 export default function defineMessagesWebsockets(io: Server, socket: Socket) {
   const owner = socket.handshake.auth.user;
+  console.log("defineMessagesWebsockets , owner:", owner);
   socket.on("sendMessage", async (conversationId: string, textMessage: string) => {
-    console.log("send message", conversationId, textMessage);
-    console.log("rooms", io.sockets.adapter.rooms);
-
+    console.log("socket.on , textMessage:", textMessage);
+    console.log("defineMessagesWebsockets , owner:", owner);
     const conversation = await conversationRepository.getConversationUsers(conversationId);
     const roomName = conversation?.id;
     try {
       const message = await addMessageToConversation(textMessage, owner.id, conversationId);
-      console.log("database message");
 
-      console.log("room name", roomName);
       if (roomName) {
         io.to(roomName).emit("sendMessage", message);
       }
