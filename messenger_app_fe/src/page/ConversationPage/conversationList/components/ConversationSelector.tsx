@@ -11,8 +11,7 @@ export const ConversationSelector = ({ name, conversationId, lastMessage }: { na
   const isCurrentMessage = lastMessageFromWS && lastMessageFromWS?.conversationId === conversationId;
   const lastMessageTime = lastMessage && moment(lastMessage.created).format("HH:mm");
   const lastMessageFromWSTime = lastMessageFromWS && moment(lastMessageFromWS.created).format("HH:mm");
-  const showEmoji = lastMessageFromWS?.text === "[FaThumbsUp]" || lastMessage?.text === "[FaThumbsUp]";
-
+  const showEmoji = isCurrentMessage ? lastMessageFromWS?.text === "[FaThumbsUp]" : lastMessage?.text === "[FaThumbsUp]";
   const { conversationId: conversationIdParams } = useParams();
   const isConversationSelected = conversationId === conversationIdParams;
   return (

@@ -11,6 +11,8 @@ import { ConversationListService } from "./conversationList.service";
 
 export const ConversationList = () => {
   const [conversationList, setConversationList] = useState<Conversation[]>([]);
+  const lastMessageFromWS = useAppStore((state) => state.lastMessage);
+  console.log("ConversationList , lastMessageFromWS:", lastMessageFromWS);
   const filteredConversation = useAppStore((state) => state.filteredConversation);
   const [user] = useLocalStorage<User | null>("loginUser", null);
   const location = useLocation();
@@ -49,16 +51,39 @@ export const ConversationList = () => {
       <ConversationListHeader />
       {conversationList
         .filter((conversation) => {
+          console.log("filter conversation.Messages", conversation.Messages);
           const otherUserArray = conversation.Users?.filter((currentUser) => currentUser.id !== user?.id);
           const otherUser = otherUserArray?.length ? otherUserArray[0] : null;
           return filteredConversation ? otherUser?.name.toLowerCase().includes(filteredConversation.toLowerCase()) : true;
         })
-        .sort((a, b) =>
-          moment(a.Messages && a.Messages[a.Messages.length - 1].created).isBefore(b.Messages && b.Messages[b.Messages.length - 1].created) ? 1 : -1
-        )
+        .sort((a, b) => {
+          const conversationAcreated = a.Messages && a.Messages[a.Messages.length - 1].created;
+          console.log(".sort , conversationAcreated:", conversationAcreated);
+          const conversationBcreated = b.Messages && b.Messages[b.Messages.length - 1].created;
+          console.log(".sort , conversationBcreated:", conversationBcreated);
+
+          if (lastMessageFromWS?.conversationId === a.id) {
+            console.log(".sort , lastMessageFromWS:", lastMessageFromWS);
+            if (moment(lastMessageFromWS.created).isAfter(conversationBcreated)) {
+              console.log(".sort , lastMessageFromWS.created:", lastMessageFromWS.created);
+              return -1;
+            }
+          }
+
+          if (lastMessageFromWS?.conversationId === b.id) {
+            console.log(".sort , lastMessageFromWS:", lastMessageFromWS);
+            if (moment(lastMessageFromWS.created).isAfter(conversationAcreated)) {
+              console.log(".sort , lastMessageFromWS.created:", lastMessageFromWS.created);
+              return 1;
+            }
+          }
+
+          return moment(conversationAcreated).isBefore(conversationBcreated) ? 1 : -1;
+        })
         .map((conversation) => {
           const otherUserArray = conversation.Users?.filter((currentUser) => currentUser.id !== user?.id);
           const otherUser = otherUserArray?.length ? otherUserArray[0] : null;
+          console.log("conversation.Messages", conversation.Messages);
           return (
             <ConversationSelector
               key={conversation.id}

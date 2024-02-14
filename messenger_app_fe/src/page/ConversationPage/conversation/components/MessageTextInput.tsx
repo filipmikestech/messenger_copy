@@ -1,7 +1,7 @@
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 import { FormEvent, useState } from "react";
 import { BsEmojiSmileFill } from "react-icons/bs";
-import { FaNoteSticky, FaThumbsUp } from "react-icons/fa6";
+import { FaThumbsUp } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { socket } from "../../../../utils/socketIntance";
 export const MessageTextInput = () => {
@@ -43,13 +43,12 @@ export const MessageTextInput = () => {
         </form>
         <span className=" absolute right-3 top-1/2 -translate-y-1/2 text-messengerColor">
           <span className=" flex gap-2">
-            <FaNoteSticky style={{ height: "20px", width: "20px", cursor: "pointer" }} />
             <BsEmojiSmileFill style={{ height: "20px", width: "20px", cursor: "pointer" }} onClick={() => setShowEmojiPicker((previous) => !previous)} />
           </span>
         </span>
       </span>
       <span
-        className="h-[30px] w-[30px]"
+        className="h-[30px] w-[30px] cursor-pointer"
         onClick={() => {
           handleSendThumbUp();
         }}
