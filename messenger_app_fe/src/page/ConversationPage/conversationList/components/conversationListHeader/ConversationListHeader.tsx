@@ -57,7 +57,9 @@ export const ConversationListHeader = () => {
         </div>
       </div>
       <Search />
-      <CreateNewConversationModal open={openCreateNewConversationModal} handleClose={() => setOpenCreateNewConversationModal(false)} />
+      {openCreateNewConversationModal && (
+        <CreateNewConversationModal open={openCreateNewConversationModal} handleClose={() => setOpenCreateNewConversationModal(false)} />
+      )}
     </div>
   );
 };

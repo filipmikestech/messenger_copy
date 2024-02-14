@@ -21,6 +21,10 @@ export const MessageTextInput = () => {
     setInputText("");
   };
 
+  const handleSendThumbUp = () => {
+    socket.emit("sendMessage", conversationId, "[FaThumbsUp]");
+  };
+
   return (
     <div className="w-full h-[70px] bg-mainBgColor self-end py-3 px-5 flex gap-2 justify-center items-center">
       {showEmojiPicker && (
@@ -44,7 +48,14 @@ export const MessageTextInput = () => {
           </span>
         </span>
       </span>
-      <FaThumbsUp style={{ height: "30px", width: "30px", paddingBottom: "5px", color: "#0098fe" }} />
+      <span
+        className="h-[30px] w-[30px]"
+        onClick={() => {
+          handleSendThumbUp();
+        }}
+      >
+        <FaThumbsUp style={{ height: "30px", width: "30px", paddingBottom: "5px", color: "#0098fe" }} />
+      </span>
     </div>
   );
 };

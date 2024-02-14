@@ -12,7 +12,7 @@ type ErrorType = { error?: string; success?: string };
 export const CreateNewConversationModal = ({ open, handleClose }: CreateNewConversationModalType) => {
   const [nameForm, setNameForm] = useState("");
   const [messageForm, setMessageForm] = useState("");
-
+  const [messageFormIsTouched, setMessageFormIsTouched] = useState(false);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     socket.emit("openConversation", nameForm, messageForm, (response: ErrorType) => {
@@ -29,8 +29,20 @@ export const CreateNewConversationModal = ({ open, handleClose }: CreateNewConve
       <DialogTitle>Start new conversation</DialogTitle>
       <form className=" flex flex-col gap-4 min-w-[400px] w-full p-5 rounded-3xl" onSubmit={handleSubmit}>
         <TextField label="Name" placeholder="Input name of a friend" value={nameForm} onChange={(e) => setNameForm(e.target.value)} />
-        <TextField label="Message" placeholder="Add first message" multiline minRows={3} value={messageForm} onChange={(e) => setMessageForm(e.target.value)} />
-        <Button sx={{ backgroundColor: "#0098fe" }} type="submit" variant="contained">
+        <TextField
+          label="Message"
+          placeholder="Add first message"
+          multiline
+          minRows={3}
+          error={messageFormIsTouched && messageForm === ""}
+          helperText={messageFormIsTouched && messageForm === "" && "You need to add first message"}
+          value={messageForm}
+          onClick={() => {
+            setMessageFormIsTouched(true);
+          }}
+          onChange={(e) => setMessageForm(e.target.value)}
+        />
+        <Button sx={{ backgroundColor: "#0098fe" }} type="submit" variant="contained" disabled={messageForm === ""}>
           Submit
         </Button>
       </form>

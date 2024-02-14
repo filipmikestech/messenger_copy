@@ -20,6 +20,14 @@ export const createConversation = async (userNameJoiner: string, owner: User, te
     throw Error("Conversation already exists");
   }
 
+  if (joiner.id === owner.id) {
+    throw Error("You cannot create conversation with yourself");
+  }
+
+  if (textMessage === "") {
+    throw Error("Message field cannot be empty");
+  }
+
   return await conversationsRepository.createConversation(joiner.id, owner.id, textMessage && textMessage);
 };
 

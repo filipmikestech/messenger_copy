@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaThumbsUp } from "react-icons/fa6";
 import { ProfileImage } from "../../../../../compoments/ProfileImage";
 import useLocalStorage from "../../../../../hooks/useLocalstorage";
 import { Message, User } from "../../../../../schema";
@@ -44,13 +45,17 @@ export const ConversationMessages = ({ messages, conversationId }: ConversationM
           return (
             <div className={` flex ${isLoggedInUser ? "justify-end" : "justify-start"} ${isNewUser && "mb-4"}`} key={obj.created + obj.text}>
               {isNewUser && !isLoggedInUser && <ProfileImage />}
-              <div
-                className={` ${isLoggedInUser ? "bg-messengerColor" : " bg-inputLightBgColor"} ${
-                  isNewUser ? "ml-2" : "ml-[48px]"
-                } rounded-[25px] py-2 px-4 max-w-[55%] `}
-              >
-                {obj.text}
-              </div>
+              {obj.text === "[FaThumbsUp]" ? (
+                <FaThumbsUp style={{ height: "100px", width: "100px", marginLeft: isNewUser && !isLoggedInUser ? "8px" : "48px", color: "#0098fe" }} />
+              ) : (
+                <div
+                  className={` ${isLoggedInUser ? "bg-messengerColor" : " bg-inputLightBgColor"} ${
+                    isNewUser ? "ml-2" : "ml-[48px]"
+                  } rounded-[25px] py-2 px-4 max-w-[55%] `}
+                >
+                  {obj.text}
+                </div>
+              )}
             </div>
           );
         })}

@@ -16,13 +16,25 @@ export default function defineConversationsRoutes(expressApp: express.Applicatio
 
   router.get("/:conversationId", async (req, res, next) => {
     const { conversationId } = req.params;
-    const conversation = await conversationsUseCase.getConversation(conversationId);
+    let conversation = null;
+    try {
+      conversation = await conversationsUseCase.getConversation(conversationId);
+    } catch (e) {
+      console.log(e);
+      return res.status(500);
+    }
+
     return res.status(200).send(conversation);
   });
 
   router.delete("/:conversationId", async (req, res, next) => {
     const { conversationId } = req.params;
-    const result = await conversationsUseCase.deleteConversation(conversationId);
+    try {
+      await conversationsUseCase.deleteConversation(conversationId);
+    } catch (e) {
+      console.log(e);
+      return res.status(500);
+    }
 
     return res.status(200).send();
   });
